@@ -67,3 +67,6 @@ async function runLoadTest() {
 }
 
 runLoadTest();
+
+// To run this script, use the command:
+//node testapi -u <API_URL> -n <NUMBER_OF_REQUESTS> -c <CONCURRENCY_LEVEL>
