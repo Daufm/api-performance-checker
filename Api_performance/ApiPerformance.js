@@ -4,7 +4,7 @@ import { program } from "commander";
 import axios from "axios";
 import chalk from "chalk";
 import ora from "ora";
-import { performance } from "perf_hooks";
+
 
 
 program
@@ -14,6 +14,7 @@ program
   .requiredOption("-u, --url <url>", "API URL to test")
   .option("-n, --requests <number>", "Number of requests", "10")
   .option("-c, --concurrency <number>", "Concurrent requests", "5");
+
 
 program.parse(process.argv);
 
@@ -62,11 +63,11 @@ async function runLoadTest() {
   const rps = (times.length / (times.reduce((a, b) => a + b, 0) / 1000)).toFixed(2);
 
   console.log(chalk.green("\n📊 Results:"));
-  console.log(`  Total requests: ${times.length}`);
-  console.log(`  Min time: ${min} ms`);
-  console.log(`  Max time: ${max} ms`);
-  console.log(`  Avg time: ${avg} ms`);
-  console.log(`  Requests/sec: ${rps}`);
+  console.log(chalk.bgBlue(`  Total requests: ${times.length}`));
+  console.log(chalk.bgBlue(`  Min time: ${min} ms`));
+  console.log(chalk.bgBlue(`  Max time: ${max} ms`));
+  console.log(chalk.bgBlue(`  Avg time: ${avg} ms`));
+  console.log(chalk.bgBlue(`  Requests/sec: ${rps}`));
 }
 
 runLoadTest();
