@@ -4,7 +4,7 @@ import { program } from "commander";
 import axios from "axios";
 import chalk from "chalk";
 import ora from "ora";
-
+import fs from "fs";
 
 
 
@@ -12,20 +12,19 @@ program
   .name("apitest")
   .description("CLI tool to test API performance ")
   .version("1.0.1")
-  .requiredOption("-u, --url <url>", "API URL to test")
+  .option("-u, --url <url>", "API URL to test")
   .option("-n, --requests <number>", "Number of requests", "10")
   .option("-c, --concurrency <number>", "Concurrent requests", "5")
   .option("-t, --timeout <number>", "Request timeout in ms", "5000")
   .option("-H, --headers <headers>", "Custom headers as JSON string")
   .option("-m, --method <method>", "HTTP method to use", "GET")
   .option("-o, --output <file>", "Output results to a file")
-  .option("-config, --config <path>", "Path to config file");
+  .option("--config <path>", "Path to config file", "results.json");
 
 
 program.parse(process.argv);
 
 if (program.opts().config) {
-  const fs = require("fs");
   const configPath = program.opts().config;
   const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
   program.opts().url = config.url || program.opts().url;
@@ -96,7 +95,32 @@ async function runLoadTest() {
   const avg = (times.reduce((a, b) => a + b, 0) / times.length).toFixed(2);
   const rps = (times.length / (times.reduce((a, b) => a + b, 0) / 1000)).toFixed(2);
   const failed = totalRequests - times.length;
-  const success = times.length;
+  const successRate = (times.length / totalRequests * 100).toFixed(2);
+
+  if (resultsFile) {
+    const outputData = {
+      url,
+      method: customMethod,
+      requests: `${totalRequests} total requests`,
+      concurrency: `${maxConcurrent} concurrent requests`,
+      timeout: `${requestTimeout} ms`,
+      minTime: `${min} ms`,
+      maxTime: `${max} ms`,
+      avgTime: `${avg} ms`,
+      requestsPerSec: `${rps} requests/second(r/s)`,
+      failedRequests: failed,
+      successRate: successRate,
+      timestamp: new Date().toISOString()
+    };
+    try {
+      fs.writeFileSync(resultsFile, JSON.stringify(outputData, null, 2), "utf-8");
+      console.log(chalk.yellow(`Results saved to ${resultsFile}`));
+      return;
+    } catch (err) {
+      console.log(chalk.red(`Failed to write results to file: ${err.message}`));
+    }
+  }
+
 
   console.log(chalk.green("\n📊 Results:"));
   console.log(chalk.blue(`  Total requests: ${times.length}`));
@@ -105,7 +129,7 @@ async function runLoadTest() {
   console.log(chalk.blue(`  Avg time: ${avg} ms`));
   console.log(chalk.blue(`  Requests/sec: ${rps}`));
   console.log(chalk.red(`  Failed requests: ${failed}`));
-  console.log(chalk.green(`  Successful requests: ${success}`));
+  console.log(chalk.green(`  Successful Rate: ${successRate} %\n`));
 }
 
 runLoadTest();
