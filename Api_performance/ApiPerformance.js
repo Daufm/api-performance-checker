@@ -57,7 +57,7 @@ async function sendRequest() {
   try {
 
     await axios({
-    
+      method: customMethod,
       url,
       headers: customHeaders || {},
       timeout: requestTimeout
