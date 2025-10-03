@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// index.js
+
 import { program } from "commander";
 import axios from "axios";
 import chalk from "chalk";
