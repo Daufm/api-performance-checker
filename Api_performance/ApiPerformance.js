@@ -4,6 +4,8 @@ import { program } from "commander";
 import axios from "axios";
 import chalk from "chalk";
 import ora from "ora";
+import { performance } from "perf_hooks";
+
 
 program
   .name("apitest")
@@ -20,6 +22,7 @@ const totalRequests = parseInt(requests, 10);
 const maxConcurrent = parseInt(concurrency, 10);
 
 const spinner = ora(`Testing ${url} with ${totalRequests} requests...`).start();
+
 
 async function sendRequest() {
   const start = performance.now();
