@@ -2,13 +2,26 @@
 
 A command-line tool for testing API performance by sending multiple requests and measuring key metrics such as response times and concurrency handling.
 
-## 📦 Installation from npm
+[![npm version](https://img.shields.io/npm/v/api-performance-tester.svg)](https://www.npmjs.com/package/api-performance-tester)
+[![downloads](https://img.shields.io/npm/dw/api-performance-tester.svg)](https://www.npmjs.com/package/api-performance-tester)
+
+## Quick start
+
+Install globally and run a quick test:
+
+```sh
+npm install -g api-performance-tester
+
+apitest -u https://jsonplaceholder.typicode.com/posts -n 10 -c 2
+```
+
+## Installation from npm
 
 ```sh
 npm install -g api-performance-checker
 ```
 
-## 🚀 Usage
+## Usage
 
 ### 1. Command-Line Arguments
 
@@ -64,35 +77,7 @@ apitest --config config.json
 
 If you specify the `-o` ,`--output` option or include `output` in your config file, results will be saved as a JSON file with all key metrics.
 
-```json
-{
-  "url": "https://jsonplaceholder.typicode.com/posts",
-  "method": "GET",
-  "requests": "20 total requests",
-  "concurrency": "5 concurrent requests",
-  "timeout": "5000 ms",
-  "minTime": "28.30 ms",
-  "maxTime": "175.72 ms",
-  "avgTime": "56.04 ms",
-  "requestsPerSec": "17.84 requests/second(r/s)",
-  "failedRequests": 0,
-  "successRate": "100.00",
-  "timestamp": "2025-10-03T20:25:10.435Z"
-}
-```
-
 ## Notes
 
 - You can use either command line options or a config file.
 - The config file must be valid JSON.
-
-## Contribute
-
-Contributions are welcome! To contribute:
-
-- Fork the repository on GitHub
-- Create a new branch for your feature or fix
-- Make your changes and commit them
-- Open a pull request describing your changes
-
-Feel free to open issues for bugs, feature requests, or questions.
