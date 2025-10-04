@@ -2,18 +2,19 @@
 
 A command-line tool for testing API performance by sending multiple requests and measuring key metrics such as response times and concurrency handling.
 
-[![npm version](https://img.shields.io/npm/v/api-performance-tester.svg)](https://www.npmjs.com/package/api-performance-tester)
-[![downloads](https://img.shields.io/npm/dw/api-performance-tester.svg)](https://www.npmjs.com/package/api-performance-tester)
+[![npm version](https://img.shields.io/npm/v/api-performance-checker.svg)](https://www.npmjs.com/package/api-performance-checker)
+[![downloads](https://img.shields.io/npm/dw/api-performance-checker.svg)](https://www.npmjs.com/package/api-performance-checker)
 
 ## Quick start
 
 Install globally and run a quick test:
 
 ```sh
-npm install -g api-performance-tester
-
+npm install -g api-performance-checker
 apitest -u https://jsonplaceholder.typicode.com/posts -n 10 -c 2
 ```
+
+Package on npm: https://www.npmjs.com/package/api-performance-checker
 
 ## Installation from npm
 
