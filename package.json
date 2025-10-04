@@ -1,7 +1,7 @@
 {
   "name": "api-performance-checker",
-  "version": "1.0.1",
-  "description": "Api performance checker",
+  "version": "1.0.4",
+  "description": "CLI tool to test API performance by sending concurrent requests and measuring response times.",
   "main": "ApiPerformance.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,8 +14,15 @@
     "type": "git",
     "url": "git+https://github.com/Daufm/api-performance-checker.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "api",
+    "performance",
+    "cli",
+    "load-test",
+    "benchmark",
+    "apitest"
+  ],
+  "author": "Daufm",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Daufm/api-performance-checker/issues"

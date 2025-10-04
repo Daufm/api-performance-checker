@@ -11,15 +11,15 @@ import fs from "fs";
 program
   .name("apitest")
   .description("CLI tool to test API performance ")
-  .version("1.0.1")
+  .version("1.0.3")
   .option("-u, --url <url>", "API URL to test")
   .option("-n, --requests <number>", "Number of requests", "10")
   .option("-c, --concurrency <number>", "Concurrent requests", "5")
   .option("-t, --timeout <number>", "Request timeout in ms", "5000")
   .option("-H, --headers <headers>", "Custom headers as JSON string")
   .option("-m, --method <method>", "HTTP method to use", "GET")
-  .option("-o, --output <file>", "Output results to a file")
-  .option("--config <path>", "Path to config file", "results.json");
+  .option("-o, --output <file>", "Output results to a file", "results.json")
+  .option("--config <path>", "Path to config file");
 
 
 program.parse(process.argv);
